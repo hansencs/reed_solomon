@@ -42,6 +42,16 @@ TEST(GaloisFieldTest, Construction) {
 	EXPECT_EQ(gf4_4.value, 0);
 }
 
+TEST(GaloisFieldTest, PrimitiveEquality) {
+	EXPECT_EQ(GF<>(0), 0);
+	EXPECT_NE(GF<>(0), 1);
+	EXPECT_NE(GF<>(0), 2);
+
+	EXPECT_EQ(GF<3>(7), 7);
+	EXPECT_NE(GF<3>(7), 6);
+	EXPECT_NE(GF<3>(7), 15);
+}
+
 TEST(GaloisFieldTest, Addition) {
 	GF<3> gf8_0;
 	GF<3> gf8_1 = 1;

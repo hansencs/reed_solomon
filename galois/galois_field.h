@@ -12,6 +12,8 @@ public:
 
 	GF(unsigned value) : value { value % P } {};
 
+	// EQUALITY
+
 	inline friend bool operator==(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return lhs.value == rhs.value;
 	}
@@ -19,6 +21,24 @@ public:
 	inline friend bool operator!=(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return !(lhs == rhs);
 	}
+
+	inline friend bool operator==(const GF<Q> &lhs, unsigned rhs) {
+		return lhs.value == rhs;
+	}
+
+	inline friend bool operator!=(const GF<Q> &lhs, unsigned rhs) {
+		return !(lhs == rhs);
+	}
+
+	inline friend bool operator==(unsigned lhs, const GF<Q> &rhs) {
+		return lhs == rhs.value;
+	}
+
+	inline friend bool operator!=(unsigned lhs, const GF<Q> &rhs) {
+		return !(lhs == rhs);
+	}
+
+	// BINARY OPS
 
 	inline friend GF<Q> operator+(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return { lhs.value + rhs.value };
