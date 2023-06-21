@@ -1,8 +1,12 @@
+#ifndef _GALOIS__GALOIS_FIELD_H_
+#define _GALOIS__GALOIS_FIELD_H_
+
 namespace reed_solomon {
 namespace galois {
 
 #define P (1 << Q)
 
+// precondition: 0 < Q <= 32
 template <unsigned Q = 1>
 class GF {
 public:
@@ -51,3 +55,5 @@ public:
 
 } // namespace galois
 } // namespace reed_solomon
+
+#endif // _GALOIS__GALOIS_FIELD_H_
