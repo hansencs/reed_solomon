@@ -4,17 +4,42 @@
 namespace reed_solomon {
 namespace galois {
 
-#define P (1 << Q)
-
+#include <iostream>
 // precondition: 0 < Q <= 32
-template <unsigned Q = 1>
+template <uint32_t Q = 1>
 class GF {
 public:
-	const unsigned value;
+	static const uint64_t P = 1 << Q;
+
+	static GF load(const void *data, uint32_t index) {
+		std::cout << "load" << std::endl;
+		const uint8_t *const byte_data = (const uint8_t *) data;
+		const uint32_t bit_offset = Q * index;
+		const uint32_t byte_offset = bit_offset % 8;
+		std::cout << "bit off " << bit_offset << " byte off: " << byte_offset << std::endl;
+
+		uint32_t byte_index = bit_offset / 8;
+		uint32_t result = 0;
+		int loaded = 8 - byte_offset;
+		std::cout << "initial byte index: " << byte_index << std::endl;
+		uint32_t next_byte = byte_data[byte_index++];
+		std::cout << "initial loaded: " << loaded << " initial byte: "<< next_byte << std::endl;
+		result |= next_byte >> byte_offset;
+		while (loaded < Q) {
+			uint32_t next_byte = byte_data[byte_index++];
+			result |= next_byte << loaded;
+			loaded += 8;
+		}
+
+		const uint32_t mask = ~(((uint32_t ) 0xffffffff) << Q);
+		return { result & mask };
+	}
+
+	const uint32_t value;
 
 	GF(void) : value { 0 } {};
 
-	GF(unsigned value) : value { value % P } {};
+	GF(uint32_t value) : value { (uint32_t) (value % P) } {};
 
 	// EQUALITY
 
@@ -26,19 +51,19 @@ public:
 		return !(lhs == rhs);
 	}
 
-	inline friend bool operator==(const GF<Q> &lhs, unsigned rhs) {
+	inline friend bool operator==(const GF<Q> &lhs, uint32_t rhs) {
 		return lhs.value == rhs;
 	}
 
-	inline friend bool operator!=(const GF<Q> &lhs, unsigned rhs) {
+	inline friend bool operator!=(const GF<Q> &lhs, uint32_t rhs) {
 		return !(lhs == rhs);
 	}
 
-	inline friend bool operator==(unsigned lhs, const GF<Q> &rhs) {
+	inline friend bool operator==(uint32_t lhs, const GF<Q> &rhs) {
 		return lhs == rhs.value;
 	}
 
-	inline friend bool operator!=(unsigned lhs, const GF<Q> &rhs) {
+	inline friend bool operator!=(uint32_t lhs, const GF<Q> &rhs) {
 		return !(lhs == rhs);
 	}
 
