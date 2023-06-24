@@ -4,6 +4,7 @@
 namespace reed_solomon {
 namespace galois {
 
+#include <iostream>
 // precondition: 0 < Q <= 32
 template <uint32_t Q = 1>
 class GF {
@@ -30,16 +31,18 @@ public:
 		return { result & mask };
 	}
 
-	const uint32_t value;
+	GF(void) : _value { 0 } {};
 
-	GF(void) : value { 0 } {};
+	GF(uint32_t value) : _value { (uint32_t) (value % P) } {};
 
-	GF(uint32_t value) : value { (uint32_t) (value % P) } {};
+	uint32_t value(void) const {
+		return _value;
+	}
 
 	// EQUALITY
 
 	inline friend bool operator==(const GF<Q> &lhs, const GF<Q> &rhs) {
-		return lhs.value == rhs.value;
+		return lhs._value == rhs._value;
 	}
 
 	inline friend bool operator!=(const GF<Q> &lhs, const GF<Q> &rhs) {
@@ -47,7 +50,7 @@ public:
 	}
 
 	inline friend bool operator==(const GF<Q> &lhs, uint32_t rhs) {
-		return lhs.value == rhs;
+		return lhs._value == rhs;
 	}
 
 	inline friend bool operator!=(const GF<Q> &lhs, uint32_t rhs) {
@@ -55,7 +58,7 @@ public:
 	}
 
 	inline friend bool operator==(uint32_t lhs, const GF<Q> &rhs) {
-		return lhs == rhs.value;
+		return lhs == rhs._value;
 	}
 
 	inline friend bool operator!=(uint32_t lhs, const GF<Q> &rhs) {
@@ -65,12 +68,25 @@ public:
 	// BINARY OPS
 
 	inline friend GF<Q> operator+(const GF<Q> &lhs, const GF<Q> &rhs) {
-		return { lhs.value + rhs.value };
+		return { lhs._value + rhs._value };
+	}
+
+	inline friend GF<Q> operator+=(GF<Q> &lhs, const GF<Q> &rhs) {
+		lhs = { lhs._value + rhs._value };
+		return lhs;
 	}
 
 	inline friend GF<Q> operator*(const GF<Q> &lhs, const GF<Q> &rhs) {
-		return { lhs.value * rhs.value };
+		return { lhs._value * rhs._value };
 	}
+
+	inline friend GF<Q> operator*=(GF<Q> &lhs, const GF<Q> &rhs) {
+		lhs = { lhs._value * rhs._value };
+		return lhs;
+	}
+
+private:
+	uint32_t _value;
 };
 
 } // namespace galois

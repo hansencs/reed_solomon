@@ -5,6 +5,8 @@
 
 #include "galois/galois_field.h"
 
+
+#include <iostream>
 namespace reed_solomon {
 namespace galois {
 
@@ -24,6 +26,20 @@ public:
 			return { 0 };
 		else
 			return coefficients[i];
+	}
+
+	inline const GF<Q> operator()(GF<Q> x) const {
+		GF<Q> result = 0;
+		GF<Q> xp = 1;
+		std::cout << "eval: x = " << x.value() << " len = " << coefficients.size() << std::endl;
+
+		std::cout << "result: " << result.value() << " xp: " << xp.value() << std::endl;
+		for (GF<Q> c : coefficients) {
+			result += xp * c;
+			xp *= x;
+			std::cout << "result: " << result.value() << " xp: " << xp.value() << std::endl;
+		}
+		return result;
 	}
 
 private:
