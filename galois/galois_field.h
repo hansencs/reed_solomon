@@ -4,7 +4,6 @@
 namespace reed_solomon {
 namespace galois {
 
-#include <iostream>
 // precondition: 0 < Q <= 32
 template <uint32_t Q = 1>
 class GF {
@@ -12,18 +11,14 @@ public:
 	static const uint64_t P = 1 << Q;
 
 	static GF load(const void *data, uint32_t index) {
-		std::cout << "load" << std::endl;
 		const uint8_t *const byte_data = (const uint8_t *) data;
 		const uint32_t bit_offset = Q * index;
 		const uint32_t byte_offset = bit_offset % 8;
-		std::cout << "bit off " << bit_offset << " byte off: " << byte_offset << std::endl;
 
 		uint32_t byte_index = bit_offset / 8;
 		uint32_t result = 0;
 		int loaded = 8 - byte_offset;
-		std::cout << "initial byte index: " << byte_index << std::endl;
 		uint32_t next_byte = byte_data[byte_index++];
-		std::cout << "initial loaded: " << loaded << " initial byte: "<< next_byte << std::endl;
 		result |= next_byte >> byte_offset;
 		while (loaded < Q) {
 			uint32_t next_byte = byte_data[byte_index++];
