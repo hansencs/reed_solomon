@@ -21,5 +21,10 @@ add_executable(galois_field_test galois/galois_field_test.cpp)
 target_include_directories(galois_field_test PUBLIC .)
 target_link_libraries(galois_field_test GTest::gtest_main)
 
+add_executable(polynomial_test galois/polynomial_test.cpp)
+target_include_directories(polynomial_test PUBLIC .)
+target_link_libraries(polynomial_test GTest::gtest_main)
+
 include(GoogleTest)
 gtest_discover_tests(galois_field_test)
+gtest_discover_tests(polynomial_test)
