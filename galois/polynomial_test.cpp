@@ -92,6 +92,6 @@ TEST(PolynomialTest, Evaluation) {
 	EXPECT_EQ(p3(256), 253);
 }
 
-} // namespace test
+} // namespace polynomial_test
 } // namespace galois
 } // namespace reed_solomon
