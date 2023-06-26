@@ -7,52 +7,20 @@ namespace galois {
 namespace field_test {
 
 TEST(GaloisFieldTest, Construction) {
-	/*
-	GF<> gf2_0;
-	GF<> gf2_1 = 1;
-	GF<> gf2_2 = 2;
-	GF<> gf2_3 = 3;
+	GF gf0;
 
-	EXPECT_EQ(gf2_0, gf2_2);
-	EXPECT_EQ(gf2_1, gf2_3);
-	EXPECT_NE(gf2_0, gf2_1);
+	EXPECT_EQ(gf0, 0);
+	EXPECT_EQ(gf0.value(), 0);
+	
+	GF gf1 = 1;
 
-	EXPECT_EQ(gf2_0, 0);
-	EXPECT_EQ(gf2_1, 1);
-	EXPECT_EQ(gf2_2, 0);
-	EXPECT_EQ(gf2_3, 1);
+	EXPECT_EQ(gf1, 1);
+	EXPECT_EQ(gf1.value(), 1);
 
-	EXPECT_EQ(gf2_0.value(), 0);
-	EXPECT_EQ(gf2_1.value(), 1);
-	EXPECT_EQ(gf2_2.value(), 0);
-	EXPECT_EQ(gf2_3.value(), 1);
+	GF gf255 = 255;
 
-	GF<2> gf4_0 = 0;
-	GF<2> gf4_1 = 1;
-	GF<2> gf4_2 = 2;
-	GF<2> gf4_3 = 3;
-	GF<2> gf4_4 = 4;
-
-	EXPECT_EQ(gf4_0, gf4_4);
-	EXPECT_NE(gf4_0, gf4_1);
-	EXPECT_NE(gf4_0, gf4_2);
-	EXPECT_NE(gf4_0, gf4_3);
-	EXPECT_NE(gf4_1, gf4_2);
-	EXPECT_NE(gf4_1, gf4_3);
-	EXPECT_NE(gf4_2, gf4_3);
-
-	EXPECT_EQ(gf4_0, 0);
-	EXPECT_EQ(gf4_1, 1);
-	EXPECT_EQ(gf4_2, 2);
-	EXPECT_EQ(gf4_3, 3);
-	EXPECT_EQ(gf4_4, 0);
-
-	EXPECT_EQ(gf4_0.value(), 0);
-	EXPECT_EQ(gf4_1.value(), 1);
-	EXPECT_EQ(gf4_2.value(), 2);
-	EXPECT_EQ(gf4_3.value(), 3);
-	EXPECT_EQ(gf4_4.value(), 0);
-	*/
+	EXPECT_EQ(gf255, 255);
+	EXPECT_EQ(gf255.value(), 255);
 }
 
 TEST(GaloisFieldTest, PrimitiveEquality) {

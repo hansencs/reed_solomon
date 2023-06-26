@@ -1,31 +1,33 @@
 #ifndef _GALOIS__GALOIS_FIELD_H_
 #define _GALOIS__GALOIS_FIELD_H_
 
+#include <stdint.h>
+
 namespace reed_solomon {
 namespace galois {
 
-#include <iostream>
-// precondition: 0 < Q <= 32
-template <uint32_t Q = 1>
 class GF {
-	/*
 public:
+	GF(void);
+
+	GF(uint8_t value);
+
+	uint8_t value(void) const;
+
+	/*
 	static const uint64_t P = 1 << Q;
 
-	GF(void) : _value { 0 } {};
 
 	GF(uint32_t value) : _value { (uint32_t) (value % P) } {};
-
-	uint32_t value(void) const {
-		return _value;
-	}
+	*/
 
 	// EQUALITY
 
-	inline friend bool operator==(const GF<Q> &lhs, const GF<Q> &rhs) {
+	inline friend bool operator==(const GF &lhs, const GF &rhs) {
 		return lhs._value == rhs._value;
 	}
 
+	/*
 	inline friend bool operator!=(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return !(lhs == rhs);
 	}
@@ -66,9 +68,9 @@ public:
 		return lhs;
 	}
 
-private:
-	uint32_t _value;
 	*/
+private:
+	uint8_t _value;
 };
 
 } // namespace galois
