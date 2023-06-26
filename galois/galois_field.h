@@ -8,6 +8,7 @@ namespace galois {
 // precondition: 0 < Q <= 32
 template <uint32_t Q = 1>
 class GF {
+	/*
 public:
 	static const uint64_t P = 1 << Q;
 
@@ -67,6 +68,7 @@ public:
 
 private:
 	uint32_t _value;
+	*/
 };
 
 } // namespace galois

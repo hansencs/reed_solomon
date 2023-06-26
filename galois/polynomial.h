@@ -13,6 +13,7 @@ namespace galois {
 // precondition: 0 < Q <= 32
 template <unsigned Q = 1>
 class Polynomial {
+	/*
 public:
 	const unsigned degree;
 	
@@ -61,6 +62,7 @@ private:
 		return { };
 
 	}
+	*/
 };
 
 } // namespace galois
