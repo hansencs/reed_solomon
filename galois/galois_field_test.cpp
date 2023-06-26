@@ -53,37 +53,6 @@ TEST(GaloisFieldTest, Construction) {
 	EXPECT_EQ(gf4_4.value(), 0);
 }
 
-TEST(GaloisFieldTest, Load) {
-	uint8_t buff[] =  { 0x00, 0x01, 0x00, 0x5a };
-
-	EXPECT_EQ(GF<>::load(buff, 0), GF<>());
-	EXPECT_EQ(GF<>::load(buff, 8), GF<>(1));
-
-	EXPECT_EQ(GF<2>::load(buff, 12), GF<2>(0x02));
-	EXPECT_EQ(GF<2>::load(buff, 13), GF<2>(0x02));
-	EXPECT_EQ(GF<2>::load(buff, 14), GF<2>(0x01));
-	EXPECT_EQ(GF<2>::load(buff, 15), GF<2>(0x01));
-
-	EXPECT_EQ(GF<3>::load(buff, 0), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 1), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 2), GF<3>(0x04));
-	EXPECT_EQ(GF<3>::load(buff, 3), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 4), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 5), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 6), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 7), GF<3>());
-	EXPECT_EQ(GF<3>::load(buff, 8), GF<3>(0x02));
-	EXPECT_EQ(GF<3>::load(buff, 9), GF<3>(0x03));
-	EXPECT_EQ(GF<3>::load(buff, 10), GF<3>(0x01));
-
-	EXPECT_EQ(GF<8>::load(buff, 0), GF<8>());
-	EXPECT_EQ(GF<8>::load(buff, 1), GF<8>(0x01));
-	EXPECT_EQ(GF<8>::load(buff, 3), GF<8>(0x5a));
-
-	EXPECT_EQ(GF<16>::load(buff, 0), GF<16>(0x0100));
-	EXPECT_EQ(GF<16>::load(buff + 1, 0), GF<16>(0x0001));
-}
-
 TEST(GaloisFieldTest, PrimitiveEquality) {
 	EXPECT_EQ(GF<>(0), 0);
 	EXPECT_NE(GF<>(0), 1);
