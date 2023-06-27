@@ -38,6 +38,10 @@ TEST(GaloisFieldTest, Addition) {
 	EXPECT_EQ(gf3 + gf1, 0x42);
 
 	EXPECT_EQ(gf2 + gf3, 0x11);
+
+	EXPECT_EQ(gf3 + 0, gf3);
+	EXPECT_EQ(gf3 + 1, gf3 + gf1);
+	EXPECT_EQ(gf3 + 0x52, gf3 + gf2);
 }
 
 TEST(GaloisFieldTest, Multiplication) {
