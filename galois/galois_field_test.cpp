@@ -42,6 +42,13 @@ TEST(GaloisFieldTest, Addition) {
 	EXPECT_EQ(gf3 + 0, gf3);
 	EXPECT_EQ(gf3 + 1, gf3 + gf1);
 	EXPECT_EQ(gf3 + 0x52, gf3 + gf2);
+
+	GF gf4 = 7;
+	EXPECT_EQ(gf4 += 3, 4);
+	EXPECT_EQ(gf4, 4);
+	EXPECT_EQ(gf4 += gf1, 5);
+	EXPECT_EQ(gf4, 5);
+	EXPECT_EQ(gf1, 1);
 }
 
 TEST(GaloisFieldTest, Multiplication) {
@@ -70,6 +77,13 @@ TEST(GaloisFieldTest, Multiplication) {
 
 	EXPECT_EQ(gf7 * gf2, 0x1b);
 	EXPECT_EQ(gf7 * gf6, 0x9b);
+
+	GF gf8 = 3;
+	EXPECT_EQ(gf8 *= 3, 5);
+	EXPECT_EQ(gf8, 5);
+	EXPECT_EQ(gf8 *= gf2, 0x0a);
+	EXPECT_EQ(gf8, 0x0a);
+	EXPECT_EQ(gf2, 2);
 }
 
 } // namespace test

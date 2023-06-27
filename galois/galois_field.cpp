@@ -31,5 +31,10 @@ GF GF::operator*(const GF &rhs) const {
 	return modulus(result);
 }
 
+GF GF::operator*=(const GF &rhs) {
+	*this = *this * rhs;
+	return *this;
+}
+
 } // namespace galois
 } // namespace reed_solomon

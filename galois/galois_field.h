@@ -55,14 +55,16 @@ public:
 		return { static_cast<uint8_t>(lhs._value ^ rhs._value) };
 	}
 
-	GF operator*(const GF &rhs) const;
-
-	/*
-	inline friend GF<Q> operator+=(GF<Q> &lhs, const GF<Q> &rhs) {
-		lhs = { lhs._value + rhs._value };
+	inline friend GF operator+=(GF &lhs, const GF &rhs) {
+		lhs = lhs + rhs;
 		return lhs;
 	}
 
+	GF operator*(const GF &rhs) const;
+
+	GF operator*=(const GF &rhs);
+
+	/*
 	inline friend GF<Q> operator*(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return { lhs._value * rhs._value };
 	}
