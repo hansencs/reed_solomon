@@ -47,13 +47,15 @@ public:
 	inline friend bool operator!=(uint32_t lhs, const GF<Q> &rhs) {
 		return !(lhs == rhs);
 	}
+	*/
 
 	// BINARY OPS
 
-	inline friend GF<Q> operator+(const GF<Q> &lhs, const GF<Q> &rhs) {
-		return { lhs._value + rhs._value };
+	inline friend GF operator+(const GF &lhs, const GF &rhs) {
+		return { static_cast<uint8_t>(lhs._value ^ rhs._value) };
 	}
 
+	/*
 	inline friend GF<Q> operator+=(GF<Q> &lhs, const GF<Q> &rhs) {
 		lhs = { lhs._value + rhs._value };
 		return lhs;

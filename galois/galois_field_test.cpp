@@ -17,53 +17,27 @@ TEST(GaloisFieldTest, Construction) {
 	EXPECT_EQ(gf1, 1);
 	EXPECT_EQ(gf1.value(), 1);
 
-	GF gf255 = 255;
+	GF gf2 = 255;
 
-	EXPECT_EQ(gf255, 255);
-	EXPECT_EQ(gf255.value(), 255);
-}
-
-TEST(GaloisFieldTest, PrimitiveEquality) {
-	/*
-	EXPECT_EQ(GF<>(0), 0);
-	EXPECT_NE(GF<>(0), 1);
-	EXPECT_NE(GF<>(0), 2);
-
-	EXPECT_EQ(0, GF<>(0));
-	EXPECT_NE(1, GF<>(0));
-	EXPECT_NE(2, GF<>(0));
-
-	EXPECT_EQ(GF<3>(7), 7);
-	EXPECT_NE(GF<3>(7), 6);
-	EXPECT_NE(GF<3>(7), 15);
-
-	EXPECT_EQ(7, GF<3>(7));
-	EXPECT_NE(6, GF<3>(7));
-	EXPECT_NE(15, GF<3>(7));
-	*/
+	EXPECT_EQ(gf2, 255);
+	EXPECT_EQ(gf2.value(), 255);
 }
 
 TEST(GaloisFieldTest, Addition) {
-	/*
-	GF<3> gf8_0;
-	GF<3> gf8_1 = 1;
-	GF<3> gf8_3 = 3;
-	GF<3> gf8_6 = 6;
+	GF gf0;
+	GF gf1 = 1;
+	GF gf2 = 0x52;
+	GF gf3 = 0x43;
 
-	EXPECT_EQ(gf8_0 + gf8_1, gf8_1);
-	EXPECT_EQ(gf8_3 + gf8_6, gf8_1);
+	EXPECT_EQ(gf0 + gf0, gf0);
+	EXPECT_EQ(gf1 + gf0, gf1);
+	EXPECT_EQ(gf2 + gf0, gf2);
+	EXPECT_EQ(gf3 + gf0, gf3);
 
-	GF<3> x = 4;
+	EXPECT_EQ(gf2 + gf1, 0x53);
+	EXPECT_EQ(gf3 + gf1, 0x42);
 
-	EXPECT_EQ(x + 3, 7);
-	EXPECT_EQ(3 + x, 7);
-
-	EXPECT_EQ(x += 3, 7);
-	EXPECT_EQ(x, 7);
-
-	EXPECT_EQ(x += GF<3>(2), 1);
-	EXPECT_EQ(x, 1);
-	*/
+	EXPECT_EQ(gf2 + gf3, 0x11);
 }
 
 TEST(GaloisFieldTest, Multiplication) {

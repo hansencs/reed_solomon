@@ -1,7 +1,20 @@
 #include "galois/galois_field.h"
 
+#define P 0x011b
+
 namespace reed_solomon {
 namespace galois {
+
+/*
+static inline uint8_t modulus(uint16_t v) {
+	for (int i = 7; i >= 0; i--) {
+		if (1 & (v >> (8 + i))) {
+			v ^= P << i;
+		}
+	}
+	return static_cast<uint8_t>(v);
+}
+*/
 
 GF::GF(void) : _value { 0 } {};
 
