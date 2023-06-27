@@ -45,30 +45,31 @@ TEST(GaloisFieldTest, Addition) {
 }
 
 TEST(GaloisFieldTest, Multiplication) {
-	/*
-	GF<4> gf16_0;
-	GF<4> gf16_1 = 1;
-	GF<4> gf16_3 = 3;
-	GF<4> gf16_7 = 7;
-	GF<4> gf16_24 = 24;
+	GF gf0;
+	GF gf1 = 1;
+	GF gf2 = 2;
+	GF gf3 = 4;
+	GF gf4 = 0x22;
+	GF gf5 = 0x44;
+	GF gf6 = 3;
+	GF gf7 = 0x80;
 
-	EXPECT_EQ(gf16_0 * gf16_1, gf16_0);
-	EXPECT_EQ(gf16_0 * gf16_7, gf16_0);
-	EXPECT_EQ(gf16_1 * gf16_1, gf16_1);
-	EXPECT_EQ(gf16_1 * gf16_7, gf16_7);
-	EXPECT_EQ(gf16_7 * gf16_7, gf16_1);
+	EXPECT_EQ(gf0 * gf0, gf0);
+	EXPECT_EQ(gf1 * gf0, gf0);
+	EXPECT_EQ(gf4 * gf0, gf0);
 
-	GF<4> x = 5;
+	EXPECT_EQ(gf0 * gf1, gf0);
+	EXPECT_EQ(gf1 * gf1, gf1);
+	EXPECT_EQ(gf4 * gf1, gf4);
 
-	EXPECT_EQ(x * 3, 15);
-	EXPECT_EQ(3 * x, 15);
+	EXPECT_EQ(gf0 * gf2, gf0);
+	EXPECT_EQ(gf1 * gf2, gf2);
+	EXPECT_EQ(gf2 * gf2, gf3);
+	EXPECT_EQ(gf4 * gf2, gf5);
+	EXPECT_EQ(gf6 * gf6, 5);
 
-	EXPECT_EQ(x *= 4, 4);
-	EXPECT_EQ(x, 4);
-
-	EXPECT_EQ(x *= GF<4>(2), 8);
-	EXPECT_EQ(x, 8);
-	*/
+	EXPECT_EQ(gf7 * gf2, 0x1b);
+	EXPECT_EQ(gf7 * gf6, 0x9b);
 }
 
 } // namespace test
