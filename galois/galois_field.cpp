@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "galois/galois_field.h"
 
 #define P 0x011b
@@ -43,6 +45,8 @@ static inline int degree(uint8_t v) {
 }
 
 DivResult GF::operator/(const GF &rhs) const {
+	assert(rhs != 0);
+
 	uint8_t q = 0, r = _value;
 	int d = degree(rhs._value);
 	for (int i = 7; i >= d; i--) {
@@ -53,6 +57,19 @@ DivResult GF::operator/(const GF &rhs) const {
 		}
 	}
 	return { q, r };
+}
+
+GF GF::euc_alg(const GF &other) const {
+	assert(*this != 0);
+	assert(other != 0);
+
+	GF a = *this, b = other;
+	do {
+		DivResult result = a / b;
+		a = b;
+		b = result.r;
+	} while (b != 0);
+	return a;
 }
 
 } // namespace galois

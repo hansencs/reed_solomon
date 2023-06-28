@@ -29,11 +29,11 @@ public:
 		return lhs._value == rhs._value;
 	}
 
-	/*
-	inline friend bool operator!=(const GF<Q> &lhs, const GF<Q> &rhs) {
+	inline friend bool operator!=(const GF &lhs, const GF &rhs) {
 		return !(lhs == rhs);
 	}
 
+	/*
 	inline friend bool operator==(const GF<Q> &lhs, uint32_t rhs) {
 		return lhs._value == rhs;
 	}
@@ -67,6 +67,8 @@ public:
 	GF operator*=(const GF &rhs);
 
 	DivResult operator/(const GF &rhs) const;
+
+	GF euc_alg(const GF &other) const;
 
 	/*
 	inline friend GF<Q> operator*(const GF<Q> &lhs, const GF<Q> &rhs) {
