@@ -36,5 +36,24 @@ GF GF::operator*=(const GF &rhs) {
 	return *this;
 }
 
+static inline int degree(uint8_t v) {
+	int d = 7;
+	for (; !(1 & (v >> d)) && d >= 0; d--);
+	return d;
+}
+
+DivResult GF::operator/(const GF &rhs) const {
+	uint8_t q = 0, r = _value;
+	int d = degree(rhs._value);
+	for (int i = 7; i >= d; i--) {
+		if (1 & (r >> i)) {
+			int j = i - d;
+			q ^= 1 << j;
+			r ^= rhs._value << j;
+		}
+	}
+	return { q, r };
+}
+
 } // namespace galois
 } // namespace reed_solomon

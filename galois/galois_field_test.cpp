@@ -55,28 +55,28 @@ TEST(GaloisFieldTest, Multiplication) {
 	GF gf0;
 	GF gf1 = 1;
 	GF gf2 = 2;
-	GF gf3 = 4;
-	GF gf4 = 0x22;
-	GF gf5 = 0x44;
-	GF gf6 = 3;
+	GF gf3 = 3;
+	GF gf4 = 4;
+	GF gf5 = 0x22;
+	GF gf6 = 0x44;
 	GF gf7 = 0x80;
 
 	EXPECT_EQ(gf0 * gf0, gf0);
 	EXPECT_EQ(gf1 * gf0, gf0);
-	EXPECT_EQ(gf4 * gf0, gf0);
+	EXPECT_EQ(gf5 * gf0, gf0);
 
 	EXPECT_EQ(gf0 * gf1, gf0);
 	EXPECT_EQ(gf1 * gf1, gf1);
-	EXPECT_EQ(gf4 * gf1, gf4);
+	EXPECT_EQ(gf5 * gf1, gf5);
 
 	EXPECT_EQ(gf0 * gf2, gf0);
 	EXPECT_EQ(gf1 * gf2, gf2);
-	EXPECT_EQ(gf2 * gf2, gf3);
-	EXPECT_EQ(gf4 * gf2, gf5);
-	EXPECT_EQ(gf6 * gf6, 5);
+	EXPECT_EQ(gf2 * gf2, gf4);
+	EXPECT_EQ(gf5 * gf2, gf6);
+	EXPECT_EQ(gf3 * gf3, 5);
 
 	EXPECT_EQ(gf7 * gf2, 0x1b);
-	EXPECT_EQ(gf7 * gf6, 0x9b);
+	EXPECT_EQ(gf7 * gf3, 0x9b);
 
 	GF gf8 = 3;
 	EXPECT_EQ(gf8 *= 3, 5);
@@ -84,6 +84,44 @@ TEST(GaloisFieldTest, Multiplication) {
 	EXPECT_EQ(gf8 *= gf2, 0x0a);
 	EXPECT_EQ(gf8, 0x0a);
 	EXPECT_EQ(gf2, 2);
+}
+
+TEST(GaloisFieldTest, Division) {
+	GF gf0;
+	GF gf1 = 1;
+	GF gf2 = 2;
+	GF gf3 = 3;
+	GF gf4 = 4;
+
+	DivResult r0 = gf0 / gf1;
+	EXPECT_EQ(r0.q, gf0);
+	EXPECT_EQ(r0.r, gf0);
+	DivResult r1 = gf0 / gf2;
+	EXPECT_EQ(r1.q, gf0);
+	EXPECT_EQ(r1.r, gf0);
+
+	DivResult r2 = gf1 / gf1;
+	EXPECT_EQ(r2.q, gf1);
+	EXPECT_EQ(r2.r, gf0);
+	DivResult r3 = gf3 / gf1;
+	EXPECT_EQ(r3.q, gf3);
+	EXPECT_EQ(r3.r, gf0);
+
+	DivResult r4 = gf4 / gf2;
+	EXPECT_EQ(r4.q, gf2);
+	EXPECT_EQ(r4.r, gf0);
+
+	DivResult r5 = gf3 / gf2;
+	EXPECT_EQ(r5.q, gf1);
+	EXPECT_EQ(r5.r, gf1);
+
+	DivResult r6 = gf4 / gf3;
+	EXPECT_EQ(r6.q, gf3);
+	EXPECT_EQ(r6.r, gf1);
+
+	DivResult r7 = gf3 / gf4;
+	EXPECT_EQ(r7.q, gf0);
+	EXPECT_EQ(r7.r, gf3);
 }
 
 } // namespace test

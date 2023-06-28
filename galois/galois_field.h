@@ -6,6 +6,8 @@
 namespace reed_solomon {
 namespace galois {
 
+struct DivResult;
+
 class GF {
 public:
 	GF(void);
@@ -64,6 +66,8 @@ public:
 
 	GF operator*=(const GF &rhs);
 
+	DivResult operator/(const GF &rhs) const;
+
 	/*
 	inline friend GF<Q> operator*(const GF<Q> &lhs, const GF<Q> &rhs) {
 		return { lhs._value * rhs._value };
@@ -77,6 +81,11 @@ public:
 	*/
 private:
 	uint8_t _value;
+};
+
+struct DivResult {
+	GF q;
+	GF r;
 };
 
 } // namespace galois
