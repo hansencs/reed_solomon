@@ -5,16 +5,18 @@
 
 #include "galois/galois_field.h"
 
-
-#include <iostream>
 namespace reed_solomon {
 namespace galois {
 
-// precondition: 0 < Q <= 32
-template <unsigned Q = 1>
 class Polynomial {
-	/*
 public:
+	Polynomial(const std::vector<GF> &coefficients);
+
+	int degree(void) const;
+
+	GF operator[](unsigned i) const;
+
+	/*
 	const unsigned degree;
 	
 	Polynomial(const std::vector<GF<Q>> &coefficients) :
@@ -42,8 +44,12 @@ public:
 		}
 		return result;
 	}
+	*/
 
 private:
+	std::vector<const GF> coefficients;
+
+	/*
 	const std::vector<const GF<Q>> coefficients;
 
 	static unsigned find_degree(const std::vector<GF<Q>> &coefficients) {

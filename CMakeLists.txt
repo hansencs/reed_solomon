@@ -15,18 +15,18 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_library(galois_field galois/galois_field.cpp)
-target_include_directories(galois_field PUBLIC .)
+add_library(galois galois/galois_field.cpp galois/polynomial.cpp)
+target_include_directories(galois PUBLIC .)
 
 enable_testing()
 
 add_executable(galois_field_test galois/galois_field_test.cpp)
 target_include_directories(galois_field_test PUBLIC .)
-target_link_libraries(galois_field_test GTest::gtest_main galois_field)
+target_link_libraries(galois_field_test GTest::gtest_main galois)
 
 add_executable(polynomial_test galois/polynomial_test.cpp)
 target_include_directories(polynomial_test PUBLIC .)
-target_link_libraries(polynomial_test GTest::gtest_main galois_field)
+target_link_libraries(polynomial_test GTest::gtest_main galois)
 
 include(GoogleTest)
 gtest_discover_tests(galois_field_test)
