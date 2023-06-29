@@ -124,36 +124,11 @@ TEST(GaloisFieldTest, Division) {
 	EXPECT_EQ(r7.r, gf3);
 }
 
-TEST(GaloisFieldTest, EuclideanAlgorithm) {
-	GF gf1 = 1;
-	GF gf2 = 2;
-	GF gf3 = 3;
-	GF gf4 = 4;
-	GF gf7 = 7;
-
-	GF r0 = gf1.euc_alg(gf1);
-	EXPECT_EQ(r0, gf1);
-	GF r1 = gf2.euc_alg(gf2);
-	EXPECT_EQ(r1, gf2);
-	GF r2 = gf3.euc_alg(gf3);
-	EXPECT_EQ(r2, gf3);
-
-	GF r3 = gf2.euc_alg(gf1);
-	EXPECT_EQ(r3, gf1);
-	GF r4 = gf1.euc_alg(gf2);
-	EXPECT_EQ(r4, gf1);
-	GF r5 = gf3.euc_alg(gf1);
-	EXPECT_EQ(r5, gf1);
-
-	GF r6 = gf3.euc_alg(gf3 * gf4);
-	EXPECT_EQ(r6, gf3);
-	GF r7 = (gf3 * gf4).euc_alg(gf3);
-	EXPECT_EQ(r7, gf3);
-
-	GF r8 = (gf3 * gf4).euc_alg(gf3 * gf7 * gf2);
-	EXPECT_EQ(r8, gf3 * gf2);
-	GF r9 = (gf3 * gf7 * gf2).euc_alg(gf3 * gf4);
-	EXPECT_EQ(r9, gf3 * gf2);
+TEST(GaloisFieldTest, Inverse) {
+	for (int i = 1; i < 256; i++) {
+		GF gf = i;
+		EXPECT_EQ(gf.inv() * gf, 1);
+	}
 }
 
 } // namespace test

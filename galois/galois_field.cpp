@@ -59,17 +59,50 @@ DivResult GF::operator/(const GF &rhs) const {
 	return { q, r };
 }
 
-GF GF::euc_alg(const GF &other) const {
-	assert(*this != 0);
-	assert(other != 0);
+// precondition: divisor has degree 7 or lower
+static inline void div16(
+		uint16_t dividend, uint16_t divisor, uint16_t &q_out, uint16_t &r_out)
+{
+	assert(divisor != 0);
 
-	GF a = *this, b = other;
-	do {
-		DivResult result = a / b;
-		a = b;
-		b = result.r;
-	} while (b != 0);
-	return a;
+	uint16_t q = 0, r = dividend;
+	int d = degree(static_cast<uint8_t>(divisor));
+	for (int i = 8; i >= d; i--) {
+		if (1 & (r >> i)) {
+			int j = i - d;
+			q ^= 1 << j;
+			r ^= divisor << j;
+		}
+	}
+	q_out = q;
+	r_out = r;
+}
+
+GF GF::inv(void) const {
+	// special case 1 as the quotient does not fit in a GF element
+	if (_value == 1) return _value;
+
+	// logical i = 0
+	uint16_t ri = P, rip1 = _value, divq, divr;
+	div16(ri, rip1, divq, divr);
+
+	// logical i = 1
+	ri = rip1;
+	rip1 = divr;
+	GF tim1 = 0, ti = 1, tip1 = tim1 + ti * GF(static_cast<uint8_t>(divq));
+
+	while (rip1 != 0) {
+		div16(ri, rip1, divq, divr);
+
+		// logical increment i
+		ri = rip1;
+		rip1 = divr;
+		tim1 = ti;
+		ti = tip1;
+		tip1 = tim1 + ti * GF(static_cast<uint8_t>(divq));
+	} 
+
+	return ti;
 }
 
 } // namespace galois

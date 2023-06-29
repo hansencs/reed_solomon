@@ -68,7 +68,7 @@ public:
 
 	DivResult operator/(const GF &rhs) const;
 
-	GF euc_alg(const GF &other) const;
+	GF inv(void) const;
 
 	/*
 	inline friend GF<Q> operator*(const GF<Q> &lhs, const GF<Q> &rhs) {
