@@ -20,7 +20,7 @@ add_library(
 	galois galois/galois_field.cpp galois/polynomial.cpp galois/solve.cpp)
 target_include_directories(galois PUBLIC .)
 
-add_library(code code/encoder.cpp)
+add_library(code code/encoder.cpp code/decoder.cpp)
 target_include_directories(code PUBLIC .)
 target_link_libraries(code galois)
 
@@ -39,12 +39,17 @@ add_executable(solve_test galois/solve_test.cpp)
 target_include_directories(solve_test PUBLIC .)
 target_link_libraries(solve_test GTest::gtest_main galois)
 
-add_executable(encoder_test code/encoder_test)
+add_executable(encoder_test code/encoder_test.cpp)
 target_include_directories(encoder_test PUBLIC .)
 target_link_libraries(encoder_test GTest::gtest_main code)
+
+add_executable(decoder_test code/decoder_test.cpp)
+target_include_directories(decoder_test PUBLIC .)
+target_link_libraries(decoder_test GTest::gtest_main code)
 
 include(GoogleTest)
 gtest_discover_tests(galois_field_test)
 gtest_discover_tests(polynomial_test)
 gtest_discover_tests(solve_test)
 gtest_discover_tests(encoder_test)
+gtest_discover_tests(decoder_test)

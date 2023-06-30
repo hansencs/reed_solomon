@@ -16,7 +16,7 @@ public:
 		unsigned k,
 		const std::vector<std::vector<GF>> &terms);
 
-	std::vector<GF> solve(std::vector<std::optional<GF>> values);
+	std::vector<GF> solve(std::vector<std::optional<GF>> values) const;
 
 private:
 	unsigned k;

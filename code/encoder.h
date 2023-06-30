@@ -1,5 +1,6 @@
 #ifndef _CODE__ENCODER_H_
 #define _CODE__ENCODER_H_
+
 namespace reed_solomon {
 namespace code {
 

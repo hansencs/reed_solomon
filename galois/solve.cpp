@@ -54,7 +54,7 @@ static inline void plug_in_solve(
 }
 
 // PUT VALUE AND TERMS IN ONE OBJECT
-vector<GF> LinearSystem::solve(vector<optional<GF>> values) {
+vector<GF> LinearSystem::solve(vector<optional<GF>> values) const {
 	vector<Equation> equations;
 	for (int i = 0; equations.size() < k; i++) {
 		if (values[i].has_value())
