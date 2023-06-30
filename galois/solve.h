@@ -14,12 +14,13 @@ public:
 	LinearSystem(
 		unsigned n,
 		unsigned k,
-		const std::vector<std::vector<GF>> &equations);
+		const std::vector<std::vector<GF>> &terms);
 
 	std::vector<GF> solve(std::vector<std::optional<GF>> values);
 
 private:
-	std::vector<std::vector<GF>> equations;
+	unsigned k;
+	std::vector<std::vector<GF>> terms;
 };
 
 } // namespace galois
