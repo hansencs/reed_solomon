@@ -11,8 +11,8 @@ struct DivResult;
 
 class GF {
 public:
-	static std::vector<GF> from_bytes(unsigned count, uint8_t *data);
-	static void to_bytes(std::vector<GF> elements, uint8_t *data);
+	static std::vector<GF> from_bytes(unsigned count, const uint8_t *data);
+	static void to_bytes(const std::vector<GF> elements, uint8_t *data);
 
 	GF(void);
 
