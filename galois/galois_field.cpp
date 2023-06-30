@@ -7,6 +7,19 @@
 namespace reed_solomon {
 namespace galois {
 
+std::vector<GF> GF::from_bytes(unsigned count, uint8_t *data) {
+	std::vector<GF> result;
+	for (int i = 0; i < count; i++)
+		result.push_back(data[i]);
+	return result;
+}
+
+void GF::to_bytes(std::vector<GF> elements, uint8_t *data) {
+	int i = 0;
+	for (GF element : elements)
+		data[i++] = element.value();
+}
+
 static inline uint8_t modulus(uint16_t v) {
 	for (int i = 7; i >= 0; i--) {
 		if (1 & (v >> (8 + i))) {

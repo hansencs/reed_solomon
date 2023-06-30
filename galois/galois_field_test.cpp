@@ -131,6 +131,49 @@ TEST(GaloisFieldTest, Inverse) {
 	}
 }
 
+TEST(GaloisFieldTest, FromBytes) {
+	uint8_t buff0[] = { 0x00, 0x01, 0x02, 0xff, 0xfe, 0x00 };
+
+	std::vector<GF> r0 = GF::from_bytes(1, buff0);
+	EXPECT_EQ(r0.size(), 1);
+	EXPECT_EQ(r0[0], 0);
+
+	std::vector<GF> r1 = GF::from_bytes(6, buff0);
+	EXPECT_EQ(r1.size(), 6);
+	EXPECT_EQ(r1[0], 0);
+	EXPECT_EQ(r1[1], 1);
+	EXPECT_EQ(r1[2], 2);
+	EXPECT_EQ(r1[3], 0xff);
+	EXPECT_EQ(r1[4], 0xfe);
+	EXPECT_EQ(r1[5], 0);
+
+	std::vector<GF> r2 = GF::from_bytes(3, buff0 + 3);
+	EXPECT_EQ(r2.size(), 3);
+	EXPECT_EQ(r2[0], 0xff);
+	EXPECT_EQ(r2[1], 0xfe);
+	EXPECT_EQ(r2[2], 0);
+}
+
+TEST(GaloisFieldTest, ToBytes) {
+	uint8_t buff0[4];
+
+	std::vector<GF> v0 = { 0x00 };
+	GF::to_bytes(v0, buff0);
+	EXPECT_EQ(buff0[0], 0);
+
+	std::vector<GF> v1 = { 0x00, 0xff, 0xfe, 0x00 };
+	GF::to_bytes(v1, buff0);
+	EXPECT_EQ(buff0[0], 0);
+	EXPECT_EQ(buff0[1], 0xff);
+	EXPECT_EQ(buff0[2], 0xfe);
+	EXPECT_EQ(buff0[3], 0);
+
+	std::vector<GF> v2 = { 0x01, 0x10 };
+	GF::to_bytes(v2, buff0 + 2);
+	EXPECT_EQ(buff0[2], 1);
+	EXPECT_EQ(buff0[3], 0x10);
+}
+
 } // namespace test
 } // namespace galois
 } // namespace reed_solomon

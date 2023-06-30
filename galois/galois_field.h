@@ -2,6 +2,7 @@
 #define _GALOIS__GALOIS_FIELD_H_
 
 #include <stdint.h>
+#include <vector>
 
 namespace reed_solomon {
 namespace galois {
@@ -10,6 +11,9 @@ struct DivResult;
 
 class GF {
 public:
+	static std::vector<GF> from_bytes(unsigned count, uint8_t *data);
+	static void to_bytes(std::vector<GF> elements, uint8_t *data);
+
 	GF(void);
 
 	GF(uint8_t value);
