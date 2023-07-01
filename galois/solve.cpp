@@ -2,8 +2,6 @@
 
 #include "galois/solve.h"
 
-#include <iostream>
-#include <iomanip>
 using namespace std;
 
 namespace reed_solomon {
@@ -25,14 +23,6 @@ typedef struct equation_s {
 	vector<GF> terms;
 	GF value;
 } Equation;
-
-static void ts(Equation &e) {
-	cout << hex << (int) e.value.value() << " = ";
-	for (int i = 0; i < e.terms.size() - 1; i++) {
-		cout << "x" << i << " * " << hex << (int) e.terms[i].value() << " + ";
-	}
-	cout << "x" << e.terms.size() - 1 << " * " << hex << (int) e.terms[e.terms.size() - 1].value()  << endl;
-}
 
 static inline void remove_entry(
 	unsigned idx, const Equation &update_equation, Equation &target_equation)
@@ -70,10 +60,6 @@ vector<GF> LinearSystem::solve(vector<optional<GF>> values) const {
 		}
 		for (int j = i + 1; j < k; j++)
 			remove_entry(i, equations[i], equations[j]);
-	}
-	cout << "SOLVE" << endl;
-	for (int i = 0; i < k; i++) {
-		ts(equations[i]);
 	}
 	vector<GF> solutions;
 	solutions.resize(k);

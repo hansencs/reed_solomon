@@ -94,26 +94,44 @@ TEST(EndToEndTest, N3K2) {
 	}
 }
 
+TEST(EndToEndTest, N10K3) {
+	uint8_t message[10];
+	for (int i = 0; i < 10; i++)
+		message[i] = i * 13;
+	test_all_erasures(10, 3, message);
+}
+
 TEST(EndToEndTest, N10K1) {
 	uint8_t message = 0x7b;
 	test_all_erasures(10, 1, &message);
 }
 
-TEST(EndToEndTest, N256K254) {
-	uint8_t message[254];
+TEST(EndToEndTest, N32K30) {
+	uint8_t message[30];
+	for (int i = 0; i < 30; i++)
+		message[i] = i * 4;
+	test_all_erasures(32, 30, message);
+}
 
-	for (int i = 0; i < 254; i++)
-		message[i] = i;
-	test_all_erasures(150, 149, message);
-
-	/*
-	for (int i = 0; i < 254; i++)
+TEST(EndToEndTest, N256K200) {
+	uint8_t message[200];
+	for (int i = 0; i < 200; i++)
 		message[i] = i / 10;
-	test_all_erasures(256, 254, message);
 
-	memset(message, 0x33, sizeof(uint8_t) * 254);
-	test_all_erasures(256, 254, message);
-	*/
+	Encoder e { 256, 200 };
+	Decoder d { 256, 200 };
+	uint8_t code[256];
+	uint8_t missing_flags[256];
+	e.encode(message, code);
+	memset(missing_flags, 0, sizeof(uint8_t) * 256);
+	for (int i = 0; i < 56; i++) {
+		code[i * 2] ^= 0xff;
+		missing_flags[i * 2] = 1;
+	}
+	uint8_t result[200];
+	d.decode(code, missing_flags, result);
+	for (int i = 0; i < 200; i++)
+		EXPECT_EQ(result[i], message[i]);
 }
 
 } // namespace encoder_test
