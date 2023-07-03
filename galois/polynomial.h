@@ -16,7 +16,7 @@ public:
 	GF operator()(GF x) const;
 
 private:
-	std::vector<const GF> coefficients;
+	std::vector<GF> coefficients;
 };
 
 } // namespace galois

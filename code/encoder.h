@@ -1,6 +1,8 @@
 #ifndef _CODE__ENCODER_H_
 #define _CODE__ENCODER_H_
 
+#include <stdint.h>
+
 namespace reed_solomon {
 namespace code {
 
